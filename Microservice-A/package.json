@@ -1,0 +1,24 @@
+{
+  "name": "assignment7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "user_controller.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon users_controller.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.2.1",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.14.2",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.10"
+  },
+  "type": "module"
+}
