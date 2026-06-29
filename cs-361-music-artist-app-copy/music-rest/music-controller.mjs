@@ -44,7 +44,7 @@ router.get('/artists/:name/info',
     })
 )
 
-const MICRO_A_URL = 'http://localhost:3500'
+const MICRO_A_URL = process.env.MICRO_A_URL || 'http://localhost:3500'
 
 async function safeParseJson(response){
     try{

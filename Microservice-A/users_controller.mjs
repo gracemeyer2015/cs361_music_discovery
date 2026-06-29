@@ -13,7 +13,7 @@ import * as users from './users_model.mjs';
 const app = express();
 app.use(express.json({ limit: '5mb' }))
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3500;
 
 app.listen(PORT, async () => {
     await users.connect()
