@@ -1,3 +1,12 @@
+/* box-sizing reset: padding/border are included in an element's width
+   instead of adding to it, so fixed padding/borders never push a
+   narrow (mobile) layout wider than its container. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,15 +33,25 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  /* was `display: flex; place-items: center;` (the default Vite template) —
+     that centered #root as a single flex item and let it shrink-wrap
+     instead of filling the viewport, which fought every full-width
+     layout below. A plain block body lets #root's own max-width/margin
+     handle centering, and take full width on small screens. */
+  overflow-x: hidden;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
 }
 
 button {

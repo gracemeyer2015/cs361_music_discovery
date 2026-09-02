@@ -181,3 +181,4 @@ function ArtistCard({ artist, initialSaved = false, onRemove }) {
 }
 
 export default ArtistCard
+

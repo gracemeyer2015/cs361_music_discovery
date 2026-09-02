@@ -64,9 +64,16 @@ RESET ROOT
 
 #root {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem;
+  }
 }
 
 a{
@@ -166,8 +173,10 @@ SEARCH BAR
 .search-bar{
   width: 100%;
   max-width: 900px;
-  min-width: 680px;
-  margin: 2rem;
+  /* was `min-width: 680px`, which forced the bar wider than most phone
+     screens and caused horizontal scrolling. width:100% (capped by
+     max-width) already lets it fill any viewport. */
+  margin: 2rem auto;
 }
 
 .search-input{
@@ -228,12 +237,13 @@ ARTIST CARD
   display: inline-block;
   padding: var(--space-lg);
   width: 380px;
+  max-width: 100%;
   background-color: var(--color-bg);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: 2px 2px 8px var(--color-shadow);
   font-family: var(--font-body);
-  box-sizing: border-box; 
+  box-sizing: border-box;
 
 }
 
@@ -311,7 +321,8 @@ ARTIST CARD
 }
 
 .artist-image-holder {
-  width: 348px;
+  width: 100%;
+  max-width: 348px;
   height: 180px;
   cursor: pointer;
   overflow: hidden;
@@ -369,36 +380,96 @@ nav a{
 
 }
 
+@media (max-width: 480px) {
+  nav {
+    padding: 1rem;
+  }
+  nav a {
+    padding: 0.5rem;
+    font-size: 15px;
+  }
+}
+
 nav a:hover {
   color: #646cff;
   text-decoration: none;
 }
 
+/* .app clears the fixed nav for every page (not just the library),
+   with less top space on mobile since the nav itself shrinks there
+   (see the nav media query above). */
+.app {
+  padding-top: 6rem;
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding-top: 4.5rem;
+  }
+}
+
 .library-page{
   display: flex;
   margin: 2rem;
-  margin-top: 6rem;
   flex-direction: column;
 }
 
+@media (max-width: 480px) {
+  .library-page {
+    margin: 1rem;
+  }
+}
 
-.artist-list {
+.artist-list,
+.artist-card-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
+}
+
+/* Desktop: image + info side by side. The `order` on .artist-page-image
+   only takes effect on a flex/grid parent, so .artist-header needs
+   display:flex for it to do anything. */
+.artist-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.artist-info {
+  flex: 1;
+  min-width: 0; /* lets long bio text wrap instead of forcing the row wider */
 }
 
 .artist-page-image{
   order: 2;
   max-width: 300px;
+  width: 100%;
   height: auto;
+  border-radius: var(--radius-md);
+}
 
+/* Mobile: stack the image above the info and center everything instead
+   of a cramped side-by-side row. */
+@media (max-width: 768px) {
+  .artist-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
+  .artist-page-image {
+    order: 0;
+    max-width: 100%;
+  }
 }
 
 .artist-card .place-holder-image {
-  width: 300px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   align-items: center;
   justify-content: center;
